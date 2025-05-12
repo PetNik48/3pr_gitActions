@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4  # Актуальная версия
+        uses: actions/checkout@v4
 
       - name: Generate files
         run: |
@@ -18,7 +18,7 @@ jobs:
           echo "Hello, GitHub Actions!" > dist/output.txt
 
       - name: Upload artifacts
-        uses: actions/upload-artifact@v4  # Обновлено до v4
+        uses: actions/upload-artifact@v4
         with:
           name: build-artifacts
           path: dist/
@@ -28,7 +28,7 @@ jobs:
     needs: build
     steps:
       - name: Download artifacts
-        uses: actions/download-artifact@v4  # Обновлено до v4
+        uses: actions/download-artifact@v4
         with:
           name: build-artifacts
           path: dist/
@@ -36,7 +36,7 @@ jobs:
       - name: Verify files
         run: |
           echo "Checking files..."
-          cat dist/output.txt  # Проверка содержимого
+          cat dist/output.txt
 
   deploy:
     runs-on: ubuntu-latest
