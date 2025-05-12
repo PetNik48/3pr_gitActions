@@ -10,15 +10,15 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v4  # Актуальная версия
 
-      - name: Generate build files
+      - name: Generate files
         run: |
           mkdir -p dist
-          echo "Sample build content" > dist/build.txt
+          echo "Hello, GitHub Actions!" > dist/output.txt
 
-      - name: Upload build artifacts
-        uses: actions/upload-artifact@v3
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v4  # Обновлено до v4
         with:
           name: build-artifacts
           path: dist/
@@ -27,28 +27,28 @@ jobs:
     runs-on: ubuntu-latest
     needs: build
     steps:
-      - name: Download build artifacts
-        uses: actions/download-artifact@v3
+      - name: Download artifacts
+        uses: actions/download-artifact@v4  # Обновлено до v4
         with:
           name: build-artifacts
           path: dist/
 
-      - name: Run tests
+      - name: Verify files
         run: |
-          echo "Testing build files..."
-          cat dist/build.txt
+          echo "Checking files..."
+          cat dist/output.txt  # Проверка содержимого
 
   deploy:
     runs-on: ubuntu-latest
     needs: test
     steps:
-      - name: Download build artifacts
-        uses: actions/download-artifact@v3
+      - name: Download artifacts
+        uses: actions/download-artifact@v4
         with:
           name: build-artifacts
           path: dist/
 
-      - name: Deploy (Simulation)
+      - name: Simulate deployment
         run: |
-          echo "Deploying files from dist/:"
+          echo "Deploying files:"
           ls -R dist/
