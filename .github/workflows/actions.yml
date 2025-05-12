@@ -31,6 +31,7 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: build-artifacts
+          path: dist/
 
       - name: Run tests
         run: |
@@ -45,8 +46,9 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: build-artifacts
+          path: dist/
 
       - name: Deploy (Simulation)
         run: |
-          echo "Deploying files:"
+          echo "Deploying files from dist/:"
           ls -R dist/
